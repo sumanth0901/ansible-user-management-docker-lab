@@ -1,0 +1,19 @@
+---
+- name: Create Multiple Users
+  hosts: linux
+  become: true
+
+  vars:
+    users:
+      - dev1
+      - dev2
+      - dev3
+
+  tasks:
+    - name: Create Users
+      user:
+        name: "{{item}}"
+        state: present
+        shell: /bin/bash
+      loop: "{{users}}"
+    

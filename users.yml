@@ -1,0 +1,17 @@
+---
+- name: User Management Playbook
+  hosts: linux
+  become: true
+
+  tasks:
+    - name: Create devops group
+      group:
+        name: devops
+        state: present
+
+    - name: Create user sumanth
+      user:
+        name: sumanth
+        group: devops
+        shell: /bin/bash
+        state: present

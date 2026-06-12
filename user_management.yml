@@ -1,0 +1,29 @@
+---
+- name: Enterprise User Management
+  hosts: linux
+  become: true
+
+
+
+  vars:
+    group_name: devops
+    users:
+      - dev1
+      - dev2
+      - dev3
+
+
+  tasks:
+    - name: Create devops group
+      group:
+        name: "{{ group_name }}"
+        state: present
+
+    - name: Create users
+      user:
+        name: "{{ item }}"
+        group: "{{ group_name }}"
+        shell: /bin/bash
+        state: present
+
+      loop: "{{ users }}"
